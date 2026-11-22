@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rune.py</title>
+    <script type="module" crossorigin src="./assets/index-CLnWzE4W.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-DG1tVRWW.css">
+  </head>
+  <body>
+    <header id="hud">
+      <span class="logo">Rune.py</span>
+      <div id="purse">
+        <span class="res" data-k="ess"><img alt="" /><b>0</b></span>
+        <span class="res" data-k="fire" hidden><img alt="" /><b>0</b></span>
+        <span class="res" data-k="water" hidden><img alt="" /><b>0</b></span>
+        <span class="res" data-k="nature" hidden><img alt="" /><b>0</b></span>
+        <span class="res" data-k="zeal" hidden><img alt="" /><b>0</b></span>
+        <span class="res" data-k="glow" hidden><img alt="" /><b>0</b></span>
+        <span id="rate" hidden></span>
+        <span id="best" hidden></span>
+      </div>
+      <nav id="dock">
+        <span id="dock-list"></span>
+        <button id="btn-new" class="sq"><i class="ic i-plus" aria-hidden="true"></i></button>
+      </nav>
+      <nav id="menu">
+        <button id="btn-tree"><i class="ic i-tree" aria-hidden="true"></i><span class="lbl"></span><i class="dot" hidden></i></button>
+        <button id="btn-docs"><i class="ic i-book" aria-hidden="true"></i><span class="lbl"></span><i class="dot" hidden></i></button>
+        <button id="btn-records"><i class="ic i-chart" aria-hidden="true"></i><span class="lbl"></span></button>
+        <span class="sep"></span>
+        <button id="btn-tidy" class="sq"><i class="ic i-tidy" aria-hidden="true"></i></button>
+        <button id="btn-mute" class="sq"><i class="ic i-sound" aria-hidden="true"></i></button>
+        <button id="btn-wipe"><i class="ic i-reset" aria-hidden="true"></i><span class="lbl"></span></button>
+      </nav>
+    </header>
+
+    <div id="goal">
+      <i class="ic i-goal" aria-hidden="true"></i>
+      <b id="goal-count"></b>
+      <span id="goal-text"></span>
+      <span id="goal-bar"><i></i></span>
+      <span id="goal-num"></span>
+      <button id="goal-help"></button>
+    </div>
+
+    <main id="stage">
+      <canvas id="field"></canvas>
+      <div id="mana-row">
+        <span></span>
+        <div id="mana-bar"><div id="mana-fill"></div></div>
+        <span id="mana-num"></span>
+      </div>
+    </main>
+
+    <div id="windows"></div>
+    <section id="tree" hidden></section>
+    <div id="toast" hidden></div>
+
+  </body>
+</html>
