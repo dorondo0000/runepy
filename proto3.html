@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Spelldial · 시연판</title>
-    <script type="module" crossorigin src="./assets/proto3-m4uEzXsu.js"></script>
+    <script type="module" crossorigin src="./assets/proto3-B0aHORFA.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto3-D1gw2T4J.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto3-CjtvDzGv.css">
   </head>
   <body>
     <div id="p3">
@@ -18,7 +18,7 @@
         <p id="p3-intro"></p>
         <div id="p3-doors">
           <button id="p3-door-hunt" class="door"><b></b><span></span></button>
-          <button id="p3-door-quest" class="door"><b></b><span></span></button>
+          <button id="p3-door-quest" class="door" disabled><b></b><span></span></button>
         </div>
         <p id="p3-purse"></p>
       </section>
@@ -111,15 +111,21 @@
                 <h3 id="p3-h-edit"></h3>
                 <div class="p3-btns" id="p3-edit"></div>
               </div>
+              <!-- 발사 결과: 미리보기에서 최근에 쏘거나 흩어진 것 세 줄 -->
               <div class="p3-grp" id="p3-info">
-                <h3 id="p3-h-pattern"></h3>
-                <div class="p3-box" id="p3-pattern-box"><canvas id="p3-pattern-canvas"></canvas></div>
-                <p id="p3-pattern-text"></p>
-                <p id="p3-pattern-before"></p>
+                <h3 id="p3-h-results"></h3>
+                <ol id="p3-results"></ol>
               </div>
             </section>
             <section id="p3-main">
               <div class="p3-box" id="p3-astro-box"><canvas id="p3-astro-canvas"></canvas></div>
+              <!-- 한 칸씩 보기: 멈춤 / 한 칸, 가장 앞선 구슬의 상태 한 줄 -->
+              <div class="p3-step-row">
+                <button id="p3-pause"></button>
+                <button id="p3-step"></button>
+                <b id="p3-orb-label"></b>
+                <span id="p3-orb-line"></span>
+              </div>
               <div class="p3-ex-row">
                 <h3 id="p3-h-examples"></h3>
                 <div class="p3-btns" id="p3-examples"></div>
@@ -130,6 +136,7 @@
           <div id="p3-rules" hidden>
             <h3 id="p3-rules-title"></h3>
             <ol id="p3-rules-list"></ol>
+            <ul id="p3-rune-list"></ul>
           </div>
         </div>
         <p id="p3-toast" hidden></p>
