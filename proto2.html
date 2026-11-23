@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rune.py · 명상 시연판</title>
+    <script type="module" crossorigin src="./assets/proto2-DAEJxWp8.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/style-BI4hY9gu.js">
+    <link rel="stylesheet" crossorigin href="./assets/style-CubtjDIV.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto2-DK25hIEa.css">
+  </head>
+  <body>
+    <div id="m2">
+      <section class="m-panel" id="m-tools">
+        <div class="m-head">
+          <h1>명상</h1>
+          <small>시연판 · 한 박 = 한 숨</small>
+        </div>
+        <div class="m-body">
+          <h2>상황</h2>
+          <div class="m-col" id="m-examples"></div>
+          <h2>기물</h2>
+          <div class="m-wrap" id="m-sources"></div>
+          <p class="m-hint">누르면 무대에 놓이거나 거둬집니다. 무대의 기물은 끌어서 다른 빈 칸으로 옮깁니다.</p>
+          <h2>블록</h2>
+          <div class="m-wrap" id="m-blocks"></div>
+          <p class="m-hint">끌어서 고리에 놓습니다. 눌러서 고른 뒤 고리를 눌러도 됩니다.</p>
+          <h2>고리</h2>
+          <div id="m-rings"></div>
+        </div>
+      </section>
+
+      <main id="m-mid">
+        <div id="m-stage-box"><canvas id="m-canvas"></canvas></div>
+        <div id="m-status"><span id="m-count"></span><span id="m-msg"></span><span id="m-pick"></span></div>
+        <div id="m-controls">
+          <button id="m-breath" class="stamp" title="물길의 구슬을 한 걸음 당기며 한 박을 보냅니다">들숨</button>
+          <span class="sep"></span>
+          <button id="m-run">실행</button>
+          <button id="m-pause">멈춤</button>
+          <button id="m-step">한 박씩</button>
+          <span class="sep"></span>
+          <label>빠르기</label>
+          <button id="m-slow">보통</button>
+          <button id="m-fast">빠르게</button>
+          <span class="sep"></span>
+          <button id="m-again">다시 하기</button>
+          <span class="sep"></span>
+          <button id="m-mute" class="quiet">소리 켜짐</button>
+        </div>
+      </main>
+
+      <aside class="m-panel" id="m-ref">
+        <div class="m-head"><h1>쓸 수 있는 것</h1></div>
+        <div class="m-body">
+          <h2>박</h2>
+          <p>한 박은 마법사의 한 숨입니다. 구슬은 한 박에 한 걸음 움직입니다.</p>
+          <p><b>들숨</b>을 누르면 물길의 구슬이 한 걸음 옵니다. 마법진 안의 구슬은 박마다 한 고리씩 저절로 흐릅니다.</p>
+          <h2>기물</h2>
+          <dl>
+            <dt>이슬 우물</dt>
+            <dd>흰 구슬을 맺습니다.</dd>
+            <dt>화덕</dt>
+            <dd>붉은 구슬을 맺습니다.</dd>
+            <dt>겹수정</dt>
+            <dd>껍질 두 겹에 싸인 흰 구슬을 맺습니다.</dd>
+          </dl>
+          <p>기물은 제 칸이 비면 다음 박에 구슬 하나를 맺습니다.</p>
+          <h2>블록</h2>
+          <dl>
+            <dt>당김</dt>
+            <dd>고리에 놓여 있으면 물길의 구슬이 박마다 저절로 옵니다.</dd>
+            <dt>벗김</dt>
+            <dd>제 고리에 올라온 구슬의 껍질을 한 겹 벗깁니다.</dd>
+            <dt>갈림</dt>
+            <dd>끼운 본보기와 같은 구슬만 안으로 보내고, 나머지는 옆으로 빼서 버립니다.</dd>
+            <dt>흩기</dt>
+            <dd>제 고리에 올라온 구슬을 흩어 없앱니다.</dd>
+          </dl>
+          <p>블록은 고리 전체에 놓여 여덟 방위에 똑같이 일합니다. 구슬은 바깥 고리의 블록부터 지납니다.</p>
+          <h2>도는 고리</h2>
+          <p>바깥 고리를 도는 고리로 바꾸면 구슬을 싣고 시계 방향으로 돕니다.</p>
+          <p>구슬은 내림 칸에서 본보기와 같으면 안으로 내려갑니다. 다르면 고리의 블록이 한 번 일하고 한 바퀴 더 돕니다.</p>
+          <p>무대에서 바깥 고리의 자리를 누르면 내림 칸이 그리로 옮겨집니다.</p>
+          <h2>규칙</h2>
+          <p>한 칸에는 구슬이 하나만 있습니다. 앞이 막히면 섭니다.</p>
+          <p>같은 박에 한 칸에 드는 두 구슬은 색이 같으면 굵은 길의 구슬이 먼저 가고, 색이 다르면 합쳐져 탁한 구슬이 됩니다. 가운데도 한 칸입니다.</p>
+          <p>탁한 구슬은 그릇의 구슬 하나를 밀어내고 사라집니다.</p>
+          <p>껍질에 싸인 구슬은 그릇이 튕겨 냅니다.</p>
+          <p>가운데에 닿은 구슬은 그릇의 제 색 자리에 앉습니다. 열두 자리가 다 차면 끝납니다.</p>
+          <h2>살피기</h2>
+          <p>구슬을 누르면 지나온 길이 어두운 점으로, 가운데까지 남은 걸음이 금빛 점으로 보입니다.</p>
+        </div>
+      </aside>
+    </div>
+
+  </body>
+</html>
