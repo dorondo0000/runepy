@@ -4,81 +4,66 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>Spelldial · 시연판</title>
-    <script type="module" crossorigin src="./assets/proto3-B0aHORFA.js"></script>
+    <script type="module" crossorigin src="./assets/proto3-C5rbosLf.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto3-CjtvDzGv.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto3-CNLKwaFF.css">
   </head>
   <body>
     <div id="p3">
-      <!-- 처음 화면: 문 둘 -->
+      <!-- 처음 화면: 문 셋 (연습장이 맨 앞) -->
       <section id="p3-title-screen">
         <h1 id="p3-title"></h1>
         <p id="p3-sub"></p>
         <p id="p3-intro"></p>
         <div id="p3-doors">
+          <button id="p3-door-practice" class="door"><b></b><span></span></button>
+          <button id="p3-door-quest" class="door"><b></b><span></span></button>
           <button id="p3-door-hunt" class="door"><b></b><span></span></button>
-          <button id="p3-door-quest" class="door" disabled><b></b><span></span></button>
         </div>
         <p id="p3-purse"></p>
       </section>
 
-      <!-- 의뢰 화면: 위에 계산대와 손님, 아래에 의뢰 작업대(수정 창을 옮겨 쓴다)와 확인할 것 -->
-      <section id="p3-orders" hidden>
-        <header id="p3-ord-head">
-          <h2 id="p3-ord-title"></h2>
-          <span id="p3-ord-progress"></span>
-          <span class="grow"></span>
-          <span id="p3-ord-purse"></span>
-          <button id="p3-ord-back"></button>
+      <!-- 전장 화면: 사냥, 연습장, 의뢰 작업대가 함께 쓴다 (class mode-hunt / mode-practice / mode-orders) -->
+      <section id="p3-battle" hidden>
+        <canvas id="p3-world"></canvas>
+        <!-- 사냥: 체력, 레벨, 남은 시간 -->
+        <header id="p3-hud">
+          <span id="p3-hp"></span>
+          <span id="p3-lv"><b id="p3-level"></b><span id="p3-xp"><i id="p3-xp-fill"></i></span></span>
+          <span id="p3-time"></span>
         </header>
-        <div id="p3-ord-counter">
+        <!-- 연습장: 이름, 안내, 처음 화면 -->
+        <header id="p3-pr-head" hidden>
+          <h2 id="p3-pr-title"></h2>
+          <span id="p3-pr-note"></span>
+          <button id="p3-pr-back"></button>
+        </header>
+        <!-- 의뢰: 위쪽 띠에 계산대와 손님, 말풍선, 확인할 것 -->
+        <header id="p3-ord-band" hidden>
           <div id="p3-counter-box"><canvas id="p3-counter"></canvas></div>
           <div id="p3-bubble">
             <div class="say">
-              <b id="p3-ord-who"></b>
+              <p class="who"><b id="p3-ord-who"></b><span id="p3-ord-progress"></span><span id="p3-ord-purse"></span></p>
               <p id="p3-ord-words"></p>
             </div>
             <div id="p3-ord-talk">
               <button id="p3-ord-again"></button>
               <button id="p3-ord-next" hidden></button>
+              <button id="p3-ord-back"></button>
             </div>
           </div>
-        </div>
-        <div id="p3-ord-work">
-          <div id="p3-ord-desk"></div>
-          <aside id="p3-ord-side">
-            <div id="p3-ord-pattern-slot"></div>
-            <div class="p3-grp" id="p3-ord-checks">
+          <div id="p3-ord-checks">
+            <div class="row">
               <h3 id="p3-h-checks"></h3>
-              <p id="p3-ord-parts"></p>
-              <ul id="p3-ord-list"></ul>
-              <p id="p3-ord-hidden"></p>
-            </div>
-            <p id="p3-ord-msg"></p>
-            <div class="p3-btns" id="p3-ord-btns">
+              <span id="p3-ord-hidden"></span>
+              <span class="grow"></span>
               <button id="p3-ord-test"></button>
               <button id="p3-ord-deliver"></button>
               <button id="p3-ord-skip"></button>
             </div>
-          </aside>
-        </div>
-        <!-- 하루 정산 -->
-        <div id="p3-ord-end" class="p3-modal" hidden>
-          <h2 id="p3-ord-end-title"></h2>
-          <p id="p3-ord-end-total"></p>
-          <ol id="p3-ord-end-list"></ol>
-          <div id="p3-ord-end-btns"></div>
-        </div>
-      </section>
-
-      <!-- 전투 화면: 화면 전체가 전장 -->
-      <section id="p3-battle" hidden>
-        <canvas id="p3-world"></canvas>
-        <header id="p3-hud">
-          <span id="p3-hp"></span>
-          <span id="p3-lv"><b id="p3-level"></b><span id="p3-xp"><i id="p3-xp-fill"></i></span></span>
-          <span id="p3-time"></span>
+            <ul id="p3-ord-list"></ul>
+          </div>
         </header>
         <p id="p3-todo"><b id="p3-todo-label"></b> <span id="p3-todo-text"></span></p>
         <div id="p3-corner">
@@ -112,6 +97,12 @@
                 <div class="p3-btns" id="p3-edit"></div>
               </div>
               <!-- 발사 결과: 미리보기에서 최근에 쏘거나 흩어진 것 세 줄 -->
+              <!-- 본보기: 4.2판 3절에 따라 천문반 아래에서 옆 띠로 옮겨 천문반을 키운다 -->
+              <div class="p3-grp p3-ex-row">
+                <h3 id="p3-h-examples"></h3>
+                <div class="p3-btns" id="p3-examples"></div>
+              </div>
+              <!-- 발사 결과: 미리보기에서 최근에 쏘거나 흩어진 것 세 줄 (한 줄씩) -->
               <div class="p3-grp" id="p3-info">
                 <h3 id="p3-h-results"></h3>
                 <ol id="p3-results"></ol>
@@ -125,10 +116,6 @@
                 <button id="p3-step"></button>
                 <b id="p3-orb-label"></b>
                 <span id="p3-orb-line"></span>
-              </div>
-              <div class="p3-ex-row">
-                <h3 id="p3-h-examples"></h3>
-                <div class="p3-btns" id="p3-examples"></div>
               </div>
             </section>
           </div>
@@ -154,6 +141,14 @@
           <p id="p3-end-stats"></p>
           <p id="p3-end-sub"></p>
           <div id="p3-end-btns"></div>
+        </div>
+
+        <!-- 의뢰: 하루 정산 -->
+        <div id="p3-ord-end" class="p3-modal" hidden>
+          <h2 id="p3-ord-end-title"></h2>
+          <p id="p3-ord-end-total"></p>
+          <ol id="p3-ord-end-list"></ol>
+          <div id="p3-ord-end-btns"></div>
         </div>
       </section>
     </div>
