@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rune.py · 긋기 시연판</title>
+    <script type="module" crossorigin src="./assets/proto-zOPPNfuk.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/dist-BWAGBJFN.js">
+    <link rel="stylesheet" crossorigin href="./assets/dist-CubtjDIV.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto-BloZqFpS.css">
+  </head>
+  <body>
+    <div id="proto">
+      <section class="p-panel" id="p-code">
+        <div class="p-head">
+          <h1>긋기</h1>
+          <small>시연판 · 한 줄 = 한 동작 = 한 박자</small>
+        </div>
+        <div id="p-examples"></div>
+        <div id="p-editor"></div>
+        <div id="p-status"></div>
+        <div id="p-log"></div>
+      </section>
+
+      <main id="p-mid">
+        <div id="p-stage-box"><canvas id="p-canvas"></canvas></div>
+        <div id="p-controls">
+          <button id="p-run" class="stamp">실행</button>
+          <button id="p-pause">멈춤</button>
+          <button id="p-step">한 줄씩</button>
+          <span class="sep"></span>
+          <label>빠르기</label>
+          <button id="p-slow">보통</button>
+          <button id="p-fast">빠르게</button>
+          <span class="sep"></span>
+          <span class="p-count">봉인 <b id="p-sealed">0</b></span>
+          <span class="sep"></span>
+          <label class="p-dev" title="개발용 손잡이: 걷는 마물이 한 걸음 떼는 데 드는 붓 박자"
+            >걷는 속도 <input id="p-walk" type="range" min="1" max="4" step="1" value="2" /> <span id="p-walk-num">2</span>박자에 한 걸음</label
+          >
+          <span class="sep"></span>
+          <button id="p-mute" class="quiet">소리 켜짐</button>
+        </div>
+      </main>
+
+      <aside class="p-panel" id="p-ref">
+        <div class="p-head"><h1>쓸 수 있는 말</h1></div>
+        <div class="p-body">
+          <h2>박자를 쓰는 동작</h2>
+          <dl>
+            <dt>draw(방향)</dt>
+            <dd>붓을 한 칸 옮기고 지나온 칸에 빛길을 남깁니다.</dd>
+            <dt>move(방향)</dt>
+            <dd>길 없이 한 칸 옮깁니다.</dd>
+            <dt>wait()</dt>
+            <dd>한 박자 쉽니다.</dd>
+            <dt>release(종류)</dt>
+            <dd>가장자리의 문으로 마물을 들입니다.</dd>
+          </dl>
+          <h2>박자를 쓰지 않는 말</h2>
+          <dl>
+            <dt>find(종류)</dt>
+            <dd>붓에서 가장 가까운 그 마물. 없으면 None. <code>.x .y .dir</code>로 읽습니다.</dd>
+            <dt>me.x, me.y</dt>
+            <dd>붓의 자리. 왼쪽 아래가 (0, 0)입니다.</dd>
+            <dt>EAST WEST NORTH SOUTH</dt>
+            <dd>방향.</dd>
+            <dt>IMP WALKER CHARGER</dt>
+            <dd>잡귀, 걷는 마물, 달려드는 마물.</dd>
+          </dl>
+          <h2>규칙</h2>
+          <p>빛길을 다시 밟으면 길이 닫히고, 고리 안쪽의 마물이 봉인됩니다. 고리 위의 칸은 안이 아닙니다.</p>
+          <p>벽은 길이 아닙니다.</p>
+          <p>마물이 빛길을 밟으면 길 전체가 꺼집니다. 붓을 밟으면 붓이 두 박자 멎습니다.</p>
+          <p>한 박자 안에서는 붓이 먼저 움직이고 마물이 그다음에 걷습니다.</p>
+          <p>몸 위 화살표가 마물의 다음 걸음입니다. 밝으면 바로 다음 박자에 뗍니다.</p>
+          <h2>문법</h2>
+          <p><code>for</code> <code>range</code> <code>while</code> <code>if elif else</code> <code>and or not</code> <code>def return</code> <code>print</code>, 셈, 변수, 리스트를 모두 쓸 수 있습니다.</p>
+        </div>
+      </aside>
+    </div>
+
+  </body>
+</html>
