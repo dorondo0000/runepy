@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spelldial · 작업대 1판</title>
+    <script type="module" crossorigin src="./assets/proto4-D3Db1VMo.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
+    <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto4-C3yB4w9R.css">
+  </head>
+  <body>
+    <div id="p4">
+      <!-- 왼쪽 62%: 술식 작업대 -->
+      <section id="p4-bench">
+        <header id="p4-head">
+          <div class="row">
+            <h1 id="p4-bench-title"></h1>
+            <div class="seg" id="p4-mode"><button data-mode="edit"></button><button data-mode="seal"></button></div>
+            <nav id="p4-crumb"></nav>
+            <span class="grow"></span>
+            <button id="p4-undo"></button>
+            <button id="p4-redo"></button>
+          </div>
+          <div class="row">
+            <span class="h" id="p4-mem-title"></span>
+            <div id="p4-mem"></div>
+            <span class="grow"></span>
+            <div id="p4-sigils"></div>
+          </div>
+        </header>
+        <div id="p4-stage">
+          <svg id="p4-svg" xmlns="http://www.w3.org/2000/svg">
+            <g id="p4-cam">
+              <g id="p4-scene"></g>
+              <g id="p4-flow"></g>
+              <g id="p4-probes"></g>
+            </g>
+            <g id="p4-overlay"></g>
+            <text id="p4-measure" class="lbl" x="-9999" y="-9999"></text>
+          </svg>
+          <div id="p4-pops"></div>
+          <p id="p4-hint"></p>
+          <p id="p4-toast" hidden></p>
+        </div>
+      </section>
+
+      <!-- 오른쪽 38%: 시험장 -->
+      <section id="p4-ground">
+        <header class="row">
+          <h2 id="p4-ground-title"></h2>
+          <span id="p4-preset-name"></span>
+        </header>
+        <div class="row ctl">
+          <button id="p4-run"></button>
+          <button id="p4-pause"></button>
+          <button id="p4-step"></button>
+          <button id="p4-reset"></button>
+          <span class="grow"></span>
+          <label class="speed"><span id="p4-speed-title"></span><input id="p4-speed" type="range" min="0.2" max="3" step="0.1" value="1" /><output id="p4-speed-out"></output></label>
+        </div>
+        <div id="p4-grid-box"><svg id="p4-grid" xmlns="http://www.w3.org/2000/svg"></svg></div>
+        <p id="p4-counts"></p>
+        <div class="grp">
+          <h3 id="p4-presets-title"></h3>
+          <div id="p4-preset-btns"></div>
+        </div>
+        <div class="grp">
+          <h3 id="p4-log-title"></h3>
+          <ol id="p4-log"></ol>
+        </div>
+      </section>
+    </div>
+  </body>
+</html>
