@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rune.py</title>
+    <script type="module" crossorigin src="./assets/proto5-CCF8Pp-V.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
+    <link rel="modulepreload" crossorigin href="./assets/count-w0OnyBwQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-JSUAb0n3.js">
+    <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-DbY_gu9y.css">
+  </head>
+  <body>
+    <div id="p5">
+      <!-- 정비 화면: 마도서 | 마법진 | 시험장 -->
+      <section id="prep">
+        <header id="head">
+          <h1 id="title"></h1>
+          <span id="status"></span>
+          <span class="grow"></span>
+          <button id="sound" class="plain"></button>
+        </header>
+        <div id="cols">
+          <section id="book">
+            <div class="colhead"><h2 id="book-title"></h2><span class="grow"></span><span id="preset-title" class="small"></span><span id="presets"></span></div>
+            <div id="ed-wrap">
+              <div id="ed"></div>
+              <div id="api" hidden>
+                <div class="colhead"><h3 id="api-title"></h3><span class="grow"></span><button id="api-close" class="plain"></button></div>
+                <table id="api-table"></table>
+                <p id="api-foot" class="small"></p>
+              </div>
+            </div>
+            <div id="meter"><span id="meter-bar"><i></i></span><b id="meter-label"></b><span id="meter-note"></span></div>
+            <div id="err"><p id="err-what"></p><p id="err-why"></p><p id="err-fix"></p></div>
+            <div id="chips"></div>
+            <div id="api-row"><button id="api-open" class="plain"></button></div>
+          </section>
+          <section id="mid">
+            <div class="colhead"><h2 id="circle-title"></h2></div>
+            <canvas id="circle"></canvas>
+            <canvas id="mana"></canvas>
+            <p id="mana-text"></p>
+            <p id="test-text"></p>
+          </section>
+          <section id="right">
+            <div id="offer" hidden>
+              <div class="colhead"><h2 id="offer-title"></h2><span class="grow"></span><span id="offer-key" class="small"></span></div>
+              <ol id="offer-list"></ol>
+            </div>
+            <div class="colhead" id="range-head"><h2 id="range-title"></h2><span class="grow"></span><label id="free"><input type="checkbox" id="free-box" /><span id="free-label"></span></label></div>
+            <div id="range-box"><canvas id="range"></canvas></div>
+            <p id="free-note" class="small"></p>
+            <button id="go"><span id="go-label"></span><small id="go-key"></small></button>
+          </section>
+        </div>
+      </section>
+
+      <!-- 전투 화면 -->
+      <section id="battle" hidden>
+        <canvas id="battle-cv"></canvas>
+        <p id="banner" hidden></p>
+        <p id="battle-hint"></p>
+      </section>
+
+      <!-- 맺음 -->
+      <section id="end" hidden>
+        <h2 id="end-title"></h2>
+        <canvas id="end-circle"></canvas>
+        <p id="end-kills"></p>
+        <p id="end-augs"></p>
+        <p id="end-runes"></p>
+        <button id="end-again"></button>
+      </section>
+    </div>
+  </body>
+</html>
