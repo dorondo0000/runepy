@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Spelldial · 작업대 1판</title>
-    <script type="module" crossorigin src="./assets/proto4-D3Db1VMo.js"></script>
+    <title>Spelldial · 작업대 1.1판</title>
+    <script type="module" crossorigin src="./assets/proto4-B0N_ku1K.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto4-C3yB4w9R.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto4-CO9aE9Hh.css">
   </head>
   <body>
     <div id="p4">
@@ -40,9 +40,10 @@
             <text id="p4-measure" class="lbl" x="-9999" y="-9999"></text>
           </svg>
           <div id="p4-pops"></div>
-          <p id="p4-hint"></p>
           <p id="p4-toast" hidden></p>
         </div>
+        <!-- 아래 고정 띠: 고른 매듭의 편집 띠, 없으면 안내 글 (1.1판 3-4) -->
+        <div id="p4-bar"></div>
       </section>
 
       <!-- 오른쪽 38%: 시험장 -->
@@ -50,6 +51,8 @@
         <header class="row">
           <h2 id="p4-ground-title"></h2>
           <span id="p4-preset-name"></span>
+          <span class="grow"></span>
+          <button id="p4-reseed"></button>
         </header>
         <div class="row ctl">
           <button id="p4-run"></button>
