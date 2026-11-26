@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-CigjUNiL.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-BkPptO-G.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
-    <link rel="modulepreload" crossorigin href="./assets/dist-BUgJR2G7.js">
-    <link rel="modulepreload" crossorigin href="./assets/gate-CgoGv5y7.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BCnnHCcs.js">
+    <link rel="modulepreload" crossorigin href="./assets/gate-CcF5ZPLx.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-Ar-JpTTH.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-CndXtoKT.css">
   </head>
   <body>
     <div id="p5">
@@ -54,12 +54,12 @@
           <section id="right">
             <div id="offer" hidden>
               <div class="colhead"><h2 id="offer-title"></h2><span class="grow"></span><span id="offer-key" class="small"></span></div>
-              <ol id="offer-list"></ol>
+              <ol id="offer-list" class="cards"></ol>
             </div>
             <div class="colhead" id="range-head"><h2 id="range-title"></h2><span class="grow"></span><label id="free"><input type="checkbox" id="free-box" /><span id="free-label"></span></label></div>
             <div id="range-box"><canvas id="range"></canvas></div>
             <p id="free-note" class="small"></p>
-            <button id="go"><span id="go-label"></span><small id="go-key"></small></button>
+            <button id="go" data-snd="press"><span id="go-label"></span><small id="go-key"></small></button>
           </section>
         </div>
       </section>
@@ -79,8 +79,11 @@
         <p id="end-augs"></p>
         <p id="end-runes"></p>
         <p id="end-note"></p>
-        <button id="end-again"></button>
+        <button id="end-again" data-snd="press"></button>
       </section>
+
+      <!-- 화면 넘김 덮개(정비 ↔ 전투, 0.3초) -->
+      <div id="turn" hidden></div>
     </div>
   </body>
 </html>
