@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-BJJZ0Aj7.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-BYPdAEDi.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
-    <link rel="modulepreload" crossorigin href="./assets/dist-ZXDFolDd.js">
-    <link rel="modulepreload" crossorigin href="./assets/gate-CKnsMZs7.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Bvzg1wT6.js">
+    <link rel="modulepreload" crossorigin href="./assets/gate-C2XaM_M_.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-PCB_OpdG.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-BDpXLOP9.css">
   </head>
   <body>
     <div id="p5">
@@ -23,17 +23,11 @@
       <p id="banner" hidden></p>
       <p id="battle-hint" hidden></p>
 
-      <!-- 제목: 먹빛 바탕에 거대한 마법진이 스스로 새겨진다(titleCircle.ts) + 가운데 로고·메뉴 -->
+      <!-- 제목(v10): 바닥에 비스듬히 깔린 대마법진 + 빛기둥 + 마법사 + 해독 렌즈(titleCircle.ts), 위에 상자 없는 로고, 맨 아래 가로 메뉴 -->
       <section id="title-screen" hidden>
         <canvas id="title-bg"></canvas>
-        <div id="title-center">
-          <div id="logo" class="sheet">
-            <h1 id="logo-text"></h1>
-            <code id="logo-sub"></code>
-          </div>
-          <nav id="menu"></nav>
-        </div>
-        <p id="menu-keys"></p>
+        <h1 id="logo"><span class="rune" id="logo-rune"></span><span class="py" id="logo-py"></span></h1>
+        <nav id="menu"><div class="side left"></div><div class="mid"></div><div class="side right"></div></nav>
       </section>
 
       <!-- 증강 카드: 멈춘 전투 위에 큰 카드 세 장(고를 차례가 둘 이상이면 아래 점) -->
@@ -53,7 +47,7 @@
               </div>
               <div class="bookrow" id="preset-row"><span id="preset-title" class="small"></span><span id="presets"></span></div>
             </div>
-            <div id="band" hidden><p id="band-line"><span id="band-text"></span><span class="grow"></span><span id="band-tag"></span></p><button id="band-ex" hidden></button></div>
+            <div id="band" hidden><p id="band-line"><span id="band-text"></span><span class="grow"></span><span id="band-tag"></span><kbd id="band-key" hidden></kbd></p><button id="band-ex" hidden></button></div>
             <div id="ed-wrap">
               <div id="ed"></div>
               <!-- 문서 쪽: 편집기 위에 얹는다(편집 중인 코드·시험장은 그대로) -->
@@ -65,18 +59,18 @@
             <div id="meter"><span id="meter-bar"><i></i></span><b id="meter-label"></b><span id="meter-note"></span></div>
             <div id="err"><p id="err-what"></p><p id="err-why"></p><p id="err-fix"></p></div>
             <div id="api-row">
-              <button id="open-settings" class="plain"></button>
-              <button id="to-title" class="plain"></button>
+              <button id="open-settings" class="btn-wood sm"></button>
+              <button id="to-title" class="btn-wood sm"></button>
               <span class="grow"></span>
               <span id="slot-title" class="small"></span><span id="slots"></span>
-              <button id="slot-save" class="plain"></button><button id="slot-load" class="plain"></button>
+              <button id="slot-save" class="btn-wood sm"></button><button id="slot-load" class="btn-wood sm"></button>
             </div>
           </section>
         </div>
         <div id="dock">
-          <label id="free" class="tag"><input type="checkbox" id="free-box" /><span id="free-label"></span></label>
+          <label id="free" class="tag"><input type="checkbox" id="free-box" role="switch" /><span class="toggle" aria-hidden="true"><i></i></span><span id="free-label"></span></label>
           <p id="free-note"></p>
-          <button id="go" data-snd="press"><span id="go-label"></span><kbd id="go-key"></kbd></button>
+          <button id="go" class="btn-seal" data-snd="press"><span id="go-label"></span><kbd id="go-key"></kbd></button>
         </div>
       </section>
 
@@ -98,7 +92,7 @@
                 <p id="end-note"></p>
               </div>
             </div>
-            <button id="end-again" data-snd="press"></button>
+            <button id="end-again" class="btn-seal" data-snd="press"></button>
           </div>
         </div>
       </section>
@@ -107,17 +101,17 @@
       <div id="settings" class="panel lift" hidden>
         <div class="sheet">
           <h3 id="settings-title"></h3>
-          <button id="sound" class="plain"></button>
-          <button id="open-all" class="plain"></button>
-          <button id="wipe" class="plain"></button>
-          <button id="settings-close"></button>
+          <button id="sound" class="btn-wood row"></button>
+          <button id="open-all" class="btn-wood row"></button>
+          <button id="wipe" class="btn-wood row"></button>
+          <button id="settings-close" class="btn-wood"></button>
         </div>
       </div>
       <div id="credits" class="panel lift" hidden>
         <div class="sheet">
           <h3 id="credits-title"></h3>
           <div id="credits-body"></div>
-          <button id="credits-close"></button>
+          <button id="credits-close" class="btn-wood"></button>
         </div>
       </div>
     </div>
