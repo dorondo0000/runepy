@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-MZIrpbw_.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-1UKpq-B5.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
     <link rel="modulepreload" crossorigin href="./assets/dist-CzZAK4S-.js">
     <link rel="modulepreload" crossorigin href="./assets/gate-BWCynGjy.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-D9uFNn48.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-P-wvFkNX.css">
   </head>
   <body>
     <div id="p5">
@@ -22,7 +22,7 @@
       <div id="freeze"></div>
 
       <!-- 전투 위 글: 웨이브 끝·쓰러짐 쪽지(왼쪽 아래 키캡 줄 #keyrow는 keyRow.ts가 만든다) -->
-      <p id="banner" hidden></p>
+      <p id="banner" class="px-frame" hidden></p>
 
       <!-- 제목(v10): 바닥에 비스듬히 깔린 대마법진 + 빛기둥 + 마법사 + 해독 렌즈(titleCircle.ts), 위에 상자 없는 로고, 맨 아래 가로 메뉴 -->
       <section id="title-screen" hidden>
@@ -39,7 +39,7 @@
           <div id="hub-name"><canvas id="hub-fire" class="px" width="16" height="16"></canvas><span id="hub-name-label"></span></div>
           <nav id="hub-tabs" role="tablist"></nav>
           <div id="hub-tools">
-            <button id="hub-settings" class="btn-wood"><span class="gear" aria-hidden="true"></span><span id="hub-settings-label"></span></button>
+            <button id="hub-settings" class="btn-wood" data-tip="설정"><span class="gear" aria-hidden="true"></span><span id="hub-settings-label"></span></button>
             <button id="hub-back" class="btn-wood"><span id="hub-back-label"></span><kbd>Esc</kbd></button>
           </div>
         </header>
@@ -56,8 +56,8 @@
       <!-- 출전 전환(v17): 화면이 하얗게 0.3초 덮였다가 전투가 열린다 -->
       <div id="flash" hidden></div>
 
-      <!-- 출전 직후 목표 안내(v16 6절): 화면 위 가운데 2.5초 -->
-      <div id="goal" hidden><b id="goal-text"></b><span id="goal-sub"></span></div>
+      <!-- 출전 직후 목표 안내(v16 6절): 화면 위 가운데 2.5초. v18: 양끝이 갈라진 픽셀 리본 -->
+      <div id="goal" class="px-ribbon" hidden><b id="goal-text"></b><span id="goal-sub"></span></div>
 
       <!-- 증강 카드: 멈춘 전투 위에 큰 카드 세 장(고를 차례가 둘 이상이면 아래 점) -->
       <section id="cards-screen" hidden>
@@ -66,12 +66,12 @@
       </section>
 
       <!-- 전투 중 파편 해금 등 짧은 알림 띠(화면 위) -->
-      <p id="alert" hidden></p>
+      <p id="alert" class="px-frame" hidden></p>
 
       <!-- 마도서(v12): 전투 중 Tab으로 언제나 연다·닫는다. 열려 있는 동안 세계는 멈춘다. 고친 술식은 0.4초 뒤 이 전투에 걸린다 -->
       <section id="grimoire" hidden>
         <div id="book-wrap" class="lift">
-          <section id="book" class="sheet">
+          <section id="book" class="sheet px-frame">
             <div class="bookhead">
               <div class="bookrow">
                 <h2 id="book-title"></h2><span id="status"></span><span class="grow"></span>
@@ -99,7 +99,7 @@
 
       <!-- 문서 창(v12): 마도서와 따로 여닫는 두 번째 판(F1). 마도서가 열려 있으면 그 오른쪽에 나란히 -->
       <div id="docs-win" class="lift" hidden>
-        <section id="docs" class="sheet">
+        <section id="docs" class="sheet px-frame">
           <div class="docshead"><h2 id="docs-title"></h2><span class="grow"></span><button id="docs-close" class="btn-wood sm"></button></div>
           <input id="docs-search" type="search" autocomplete="off" spellcheck="false" />
           <div id="docs-body"></div>
@@ -112,7 +112,7 @@
       <!-- 맺음: 두루마리 -->
       <section id="end" hidden>
         <div id="scroll-wrap" class="lift">
-          <div id="scroll" class="sheet">
+          <div id="scroll" class="sheet px-frame">
             <h2 id="end-title"></h2>
             <div id="end-body">
               <canvas id="end-circle"></canvas>
@@ -131,7 +131,7 @@
 
       <!-- 작은 판: 설정(제목에서, 마도서에서도). 맨 아래 "만든 사람" 작은 줄(v16) -->
       <div id="settings" class="panel lift" hidden>
-        <div class="sheet">
+        <div class="sheet px-frame">
           <h3 id="settings-title"></h3>
           <button id="sound" class="btn-wood row"></button>
           <button id="open-all" class="btn-wood row"></button>
@@ -142,7 +142,7 @@
       </div>
       <!-- 새 게임 경고 · 새 출전 확인(v16): 기본 선택은 취소, Esc도 취소 -->
       <div id="confirm" class="panel lift" hidden role="alertdialog" aria-modal="true">
-        <div class="sheet">
+        <div class="sheet px-frame">
           <h3 id="confirm-title"></h3>
           <p id="confirm-body"></p>
           <div class="confirm-row">
