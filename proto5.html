@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-Bm2CRIlf.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-DbqtTD4a.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
-    <link rel="modulepreload" crossorigin href="./assets/dist-Bvzg1wT6.js">
-    <link rel="modulepreload" crossorigin href="./assets/gate-C2XaM_M_.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CzZAK4S-.js">
+    <link rel="modulepreload" crossorigin href="./assets/gate-BWCynGjy.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-KrtE-H8U.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-BYT7OY3D.css">
   </head>
   <body>
     <div id="p5">
@@ -21,9 +21,8 @@
       <!-- 마도서·문서가 열려 세계가 멈춘 동안 가장자리 비네팅(불투명도 = 정지 진행도) -->
       <div id="freeze"></div>
 
-      <!-- 전투 위 글: 웨이브 끝·쓰러짐 쪽지, 처음 판의 조작 안내 -->
+      <!-- 전투 위 글: 웨이브 끝·쓰러짐 쪽지(왼쪽 아래 키캡 줄 #keyrow는 keyRow.ts가 만든다) -->
       <p id="banner" hidden></p>
-      <p id="battle-hint" hidden></p>
 
       <!-- 제목(v10): 바닥에 비스듬히 깔린 대마법진 + 빛기둥 + 마법사 + 해독 렌즈(titleCircle.ts), 위에 상자 없는 로고, 맨 아래 가로 메뉴 -->
       <section id="title-screen" hidden>
@@ -31,6 +30,25 @@
         <h1 id="logo"><span class="rune" id="logo-rune"></span><span class="py" id="logo-py"></span></h1>
         <nav id="menu"><div class="side left"></div><div class="mid"></div><div class="side right"></div></nav>
       </section>
+
+      <!-- 거점(v16): 제목 배경(마법진이 왼쪽으로 옮겨 감) 위 오른쪽 양피지 판 + 책갈피 끈 탭, 오른쪽 아래 출전 인장, 왼쪽 위 ← 제목 -->
+      <section id="hub-screen" hidden>
+        <button id="hub-back" class="btn-wood"><span id="hub-back-label"></span><kbd>Esc</kbd></button>
+        <div id="hub-wrap" class="lift">
+          <div id="hub-tabs" role="tablist"><span class="rb-keys"><kbd>Q</kbd><kbd>E</kbd></span></div>
+          <section id="hub" class="sheet">
+            <div id="hub-body"></div>
+            <p id="hub-keys"><kbd>↑</kbd><kbd>↓</kbd> 고르기</p>
+          </section>
+        </div>
+        <div id="hub-go-wrap">
+          <p id="hub-go-note"></p>
+          <button id="hub-go" class="btn-seal" data-snd="press"><span id="hub-go-label"></span><kbd>Enter</kbd></button>
+        </div>
+      </section>
+
+      <!-- 출전 직후 목표 안내(v16 6절): 화면 위 가운데 2.5초 -->
+      <div id="goal" hidden><b id="goal-text"></b><span id="goal-sub"></span></div>
 
       <!-- 증강 카드: 멈춘 전투 위에 큰 카드 세 장(고를 차례가 둘 이상이면 아래 점) -->
       <section id="cards-screen" hidden>
@@ -102,7 +120,7 @@
         </div>
       </section>
 
-      <!-- 작은 판: 설정·만든 사람(제목에서, 준비·멈춤에서도) -->
+      <!-- 작은 판: 설정(제목에서, 마도서에서도). 맨 아래 "만든 사람" 작은 줄(v16) -->
       <div id="settings" class="panel lift" hidden>
         <div class="sheet">
           <h3 id="settings-title"></h3>
@@ -110,13 +128,18 @@
           <button id="open-all" class="btn-wood row"></button>
           <button id="wipe" class="btn-wood row"></button>
           <button id="settings-close" class="btn-wood"></button>
+          <p id="credits-line"></p>
         </div>
       </div>
-      <div id="credits" class="panel lift" hidden>
+      <!-- 새 게임 경고 · 새 출전 확인(v16): 기본 선택은 취소, Esc도 취소 -->
+      <div id="confirm" class="panel lift" hidden role="alertdialog" aria-modal="true">
         <div class="sheet">
-          <h3 id="credits-title"></h3>
-          <div id="credits-body"></div>
-          <button id="credits-close" class="btn-wood"></button>
+          <h3 id="confirm-title"></h3>
+          <p id="confirm-body"></p>
+          <div class="confirm-row">
+            <button id="confirm-no" class="btn-wood"></button>
+            <button id="confirm-yes" class="btn-wood danger"></button>
+          </div>
         </div>
       </div>
     </div>
