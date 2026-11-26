@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-BC1e-LzO.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-CarXmNsa.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
     <link rel="modulepreload" crossorigin href="./assets/dist-kb1TzDFb.js">
     <link rel="modulepreload" crossorigin href="./assets/gate-DFjPLCr3.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-D99BbJqP.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-CWc9BDkG.css">
   </head>
   <body>
     <div id="p5">
@@ -58,6 +58,8 @@
 
       <!-- 출전 직후 목표 안내(v16 6절): 화면 위 가운데 2.5초. v18: 양끝이 갈라진 픽셀 리본 -->
       <div id="goal" class="px-ribbon" hidden><b id="goal-text"></b><span id="goal-sub"></span></div>
+      <!-- v22 전장 변이 배지: 출전 리본 아래 한 줄 -->
+      <div id="goal-mut" hidden><canvas id="goal-mut-icon" width="18" height="18"></canvas><b id="goal-mut-name"></b><span id="goal-mut-desc"></span></div>
 
       <!-- 증강 카드: 멈춘 전투 위에 큰 카드 세 장(고를 차례가 둘 이상이면 아래 점) -->
       <section id="cards-screen" hidden>
