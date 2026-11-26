@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-BYPdAEDi.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-9Y-O9smr.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
     <link rel="modulepreload" crossorigin href="./assets/dist-Bvzg1wT6.js">
     <link rel="modulepreload" crossorigin href="./assets/gate-C2XaM_M_.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-BDpXLOP9.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-YrxmQPto.css">
   </head>
   <body>
     <div id="p5">
@@ -18,6 +18,8 @@
       <!-- 판이 떠 있을 때 뒤 세계를 어둡게(비네팅), 준비에서는 마도서 쪽만 그늘 -->
       <div id="shade"></div>
       <div id="bookshade"></div>
+      <!-- 마도서·문서가 열려 세계가 멈춘 동안 가장자리 비네팅(불투명도 = 정지 진행도) -->
+      <div id="freeze"></div>
 
       <!-- 전투 위 글: 웨이브 끝·쓰러짐 쪽지, 처음 판의 조작 안내 -->
       <p id="banner" hidden></p>
@@ -36,25 +38,24 @@
         <p id="offer-dots" hidden></p>
       </section>
 
-      <!-- 준비(웨이브 사이)·멈춤(Tab): 왼쪽 마도서 판(술식 | 문서) + 인장 단추. 마법진은 세계 속 시전자 발밑 -->
-      <section id="prep" hidden>
+      <!-- 전투 중 파편 해금 등 짧은 알림 띠(화면 위) -->
+      <p id="alert" hidden></p>
+
+      <!-- 마도서(v12): 전투 중 Tab으로 언제나 연다·닫는다. 열려 있는 동안 세계는 멈춘다. 고친 술식은 0.4초 뒤 이 전투에 걸린다 -->
+      <section id="grimoire" hidden>
         <div id="book-wrap" class="lift">
           <section id="book" class="sheet">
             <div class="bookhead">
               <div class="bookrow">
                 <h2 id="book-title"></h2><span id="status"></span><span class="grow"></span>
-                <span id="tabs" role="tablist"><button id="tab-code" class="tab on" role="tab"></button><button id="tab-docs" class="tab" role="tab"></button></span>
+                <button id="docs-toggle" class="btn-wood sm" aria-pressed="false"><span id="docs-toggle-label"></span><kbd id="docs-toggle-key"></kbd></button>
+                <button id="book-close" class="btn-wood sm"><span id="book-close-label"></span><kbd id="book-close-key"></kbd></button>
               </div>
               <div class="bookrow" id="preset-row"><span id="preset-title" class="small"></span><span id="presets"></span></div>
             </div>
             <div id="band" hidden><p id="band-line"><span id="band-text"></span><span class="grow"></span><span id="band-tag"></span><kbd id="band-key" hidden></kbd></p><button id="band-ex" hidden></button></div>
             <div id="ed-wrap">
               <div id="ed"></div>
-              <!-- 문서 쪽: 편집기 위에 얹는다(편집 중인 코드·시험장은 그대로) -->
-              <div id="docs" hidden>
-                <input id="docs-search" type="search" autocomplete="off" spellcheck="false" />
-                <div id="docs-body"></div>
-              </div>
             </div>
             <div id="meter"><span id="meter-bar"><i></i></span><b id="meter-label"></b><span id="meter-note"></span></div>
             <div id="err"><p id="err-what"></p><p id="err-why"></p><p id="err-fix"></p></div>
@@ -67,12 +68,16 @@
             </div>
           </section>
         </div>
-        <div id="dock">
-          <label id="free" class="tag"><input type="checkbox" id="free-box" role="switch" /><span class="toggle" aria-hidden="true"><i></i></span><span id="free-label"></span></label>
-          <p id="free-note"></p>
-          <button id="go" class="btn-seal" data-snd="press"><span id="go-label"></span><kbd id="go-key"></kbd></button>
-        </div>
       </section>
+
+      <!-- 문서 창(v12): 마도서와 따로 여닫는 두 번째 판(F1). 마도서가 열려 있으면 그 오른쪽에 나란히 -->
+      <div id="docs-win" class="lift" hidden>
+        <section id="docs" class="sheet">
+          <div class="docshead"><h2 id="docs-title"></h2><span class="grow"></span><button id="docs-close" class="btn-wood sm"></button></div>
+          <input id="docs-search" type="search" autocomplete="off" spellcheck="false" />
+          <div id="docs-body"></div>
+        </section>
+      </div>
 
       <!-- 마법진 크게 보기: 세계 속 발밑 마법진을 누르면 -->
       <button id="circle-view" class="lift" hidden><canvas id="circle"></canvas></button>
