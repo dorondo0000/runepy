@@ -4,86 +4,122 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-BkPptO-G.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-C8axSBwe.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
-    <link rel="modulepreload" crossorigin href="./assets/dist-BCnnHCcs.js">
-    <link rel="modulepreload" crossorigin href="./assets/gate-CcF5ZPLx.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-ZXDFolDd.js">
+    <link rel="modulepreload" crossorigin href="./assets/gate-CKnsMZs7.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-CndXtoKT.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-PCB_OpdG.css">
   </head>
   <body>
     <div id="p5">
-      <!-- 정비 화면: 마도서 | 마법진 | 시험장 -->
-      <section id="prep">
-        <header id="head">
-          <h1 id="title"></h1>
-          <span id="status"></span>
-          <span class="grow"></span>
-          <button id="open-all" class="plain"></button>
-          <button id="wipe" class="plain"></button>
-          <button id="sound" class="plain"></button>
-        </header>
-        <div id="cols">
-          <section id="book">
-            <div class="colhead"><h2 id="book-title"></h2><span class="grow"></span><span id="preset-title" class="small"></span><span id="presets"></span></div>
+      <!-- 게임 세계: 캔버스 하나가 늘 화면 전체(전투·시험장) -->
+      <canvas id="world"></canvas>
+      <!-- 판이 떠 있을 때 뒤 세계를 어둡게(비네팅), 준비에서는 마도서 쪽만 그늘 -->
+      <div id="shade"></div>
+      <div id="bookshade"></div>
+
+      <!-- 전투 위 글: 웨이브 끝·쓰러짐 쪽지, 처음 판의 조작 안내 -->
+      <p id="banner" hidden></p>
+      <p id="battle-hint" hidden></p>
+
+      <!-- 제목: 먹빛 바탕에 거대한 마법진이 스스로 새겨진다(titleCircle.ts) + 가운데 로고·메뉴 -->
+      <section id="title-screen" hidden>
+        <canvas id="title-bg"></canvas>
+        <div id="title-center">
+          <div id="logo" class="sheet">
+            <h1 id="logo-text"></h1>
+            <code id="logo-sub"></code>
+          </div>
+          <nav id="menu"></nav>
+        </div>
+        <p id="menu-keys"></p>
+      </section>
+
+      <!-- 증강 카드: 멈춘 전투 위에 큰 카드 세 장(고를 차례가 둘 이상이면 아래 점) -->
+      <section id="cards-screen" hidden>
+        <ol id="offer-list" class="cards"></ol>
+        <p id="offer-dots" hidden></p>
+      </section>
+
+      <!-- 준비(웨이브 사이)·멈춤(Tab): 왼쪽 마도서 판(술식 | 문서) + 인장 단추. 마법진은 세계 속 시전자 발밑 -->
+      <section id="prep" hidden>
+        <div id="book-wrap" class="lift">
+          <section id="book" class="sheet">
+            <div class="bookhead">
+              <div class="bookrow">
+                <h2 id="book-title"></h2><span id="status"></span><span class="grow"></span>
+                <span id="tabs" role="tablist"><button id="tab-code" class="tab on" role="tab"></button><button id="tab-docs" class="tab" role="tab"></button></span>
+              </div>
+              <div class="bookrow" id="preset-row"><span id="preset-title" class="small"></span><span id="presets"></span></div>
+            </div>
             <div id="band" hidden><p id="band-line"><span id="band-text"></span><span class="grow"></span><span id="band-tag"></span></p><button id="band-ex" hidden></button></div>
             <div id="ed-wrap">
               <div id="ed"></div>
-              <div id="api" hidden>
-                <div class="colhead"><h3 id="api-title"></h3><span class="grow"></span><button id="api-close" class="plain"></button></div>
-                <table id="api-table"></table>
-                <p id="api-foot" class="small"></p>
+              <!-- 문서 쪽: 편집기 위에 얹는다(편집 중인 코드·시험장은 그대로) -->
+              <div id="docs" hidden>
+                <input id="docs-search" type="search" autocomplete="off" spellcheck="false" />
+                <div id="docs-body"></div>
               </div>
             </div>
             <div id="meter"><span id="meter-bar"><i></i></span><b id="meter-label"></b><span id="meter-note"></span></div>
             <div id="err"><p id="err-what"></p><p id="err-why"></p><p id="err-fix"></p></div>
-            <div id="chips"></div>
             <div id="api-row">
-              <button id="api-open" class="plain"></button><span class="grow"></span>
+              <button id="open-settings" class="plain"></button>
+              <button id="to-title" class="plain"></button>
+              <span class="grow"></span>
               <span id="slot-title" class="small"></span><span id="slots"></span>
               <button id="slot-save" class="plain"></button><button id="slot-load" class="plain"></button>
             </div>
           </section>
-          <section id="mid">
-            <div class="colhead"><h2 id="circle-title"></h2></div>
-            <canvas id="circle"></canvas>
-            <canvas id="mana"></canvas>
-            <p id="mana-text"></p>
-            <p id="test-text"></p>
-          </section>
-          <section id="right">
-            <div id="offer" hidden>
-              <div class="colhead"><h2 id="offer-title"></h2><span class="grow"></span><span id="offer-key" class="small"></span></div>
-              <ol id="offer-list" class="cards"></ol>
-            </div>
-            <div class="colhead" id="range-head"><h2 id="range-title"></h2><span class="grow"></span><label id="free"><input type="checkbox" id="free-box" /><span id="free-label"></span></label></div>
-            <div id="range-box"><canvas id="range"></canvas></div>
-            <p id="free-note" class="small"></p>
-            <button id="go" data-snd="press"><span id="go-label"></span><small id="go-key"></small></button>
-          </section>
+        </div>
+        <div id="dock">
+          <label id="free" class="tag"><input type="checkbox" id="free-box" /><span id="free-label"></span></label>
+          <p id="free-note"></p>
+          <button id="go" data-snd="press"><span id="go-label"></span><kbd id="go-key"></kbd></button>
         </div>
       </section>
 
-      <!-- 전투 화면 -->
-      <section id="battle" hidden>
-        <canvas id="battle-cv"></canvas>
-        <p id="banner" hidden></p>
-        <p id="battle-hint"></p>
-      </section>
+      <!-- 마법진 크게 보기: 세계 속 발밑 마법진을 누르면 -->
+      <button id="circle-view" class="lift" hidden><canvas id="circle"></canvas></button>
 
-      <!-- 맺음 -->
+      <!-- 맺음: 두루마리 -->
       <section id="end" hidden>
-        <h2 id="end-title"></h2>
-        <canvas id="end-circle"></canvas>
-        <p id="end-kills"></p>
-        <p id="end-augs"></p>
-        <p id="end-runes"></p>
-        <p id="end-note"></p>
-        <button id="end-again" data-snd="press"></button>
+        <div id="scroll-wrap" class="lift">
+          <div id="scroll" class="sheet">
+            <h2 id="end-title"></h2>
+            <div id="end-body">
+              <canvas id="end-circle"></canvas>
+              <div id="end-side">
+                <p id="end-kills"></p>
+                <p id="end-runes"></p>
+                <p id="end-augs-head"></p>
+                <ul id="end-cards"></ul>
+                <p id="end-note"></p>
+              </div>
+            </div>
+            <button id="end-again" data-snd="press"></button>
+          </div>
+        </div>
       </section>
 
-      <!-- 화면 넘김 덮개(정비 ↔ 전투, 0.3초) -->
-      <div id="turn" hidden></div>
+      <!-- 작은 판: 설정·만든 사람(제목에서, 준비·멈춤에서도) -->
+      <div id="settings" class="panel lift" hidden>
+        <div class="sheet">
+          <h3 id="settings-title"></h3>
+          <button id="sound" class="plain"></button>
+          <button id="open-all" class="plain"></button>
+          <button id="wipe" class="plain"></button>
+          <button id="settings-close"></button>
+        </div>
+      </div>
+      <div id="credits" class="panel lift" hidden>
+        <div class="sheet">
+          <h3 id="credits-title"></h3>
+          <div id="credits-body"></div>
+          <button id="credits-close"></button>
+        </div>
+      </div>
     </div>
   </body>
 </html>
