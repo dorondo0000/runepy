@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-CCF8Pp-V.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-CigjUNiL.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
-    <link rel="modulepreload" crossorigin href="./assets/count-w0OnyBwQ.js">
-    <link rel="modulepreload" crossorigin href="./assets/dist-JSUAb0n3.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BUgJR2G7.js">
+    <link rel="modulepreload" crossorigin href="./assets/gate-CgoGv5y7.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-DbY_gu9y.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-Ar-JpTTH.css">
   </head>
   <body>
     <div id="p5">
@@ -19,11 +19,14 @@
           <h1 id="title"></h1>
           <span id="status"></span>
           <span class="grow"></span>
+          <button id="open-all" class="plain"></button>
+          <button id="wipe" class="plain"></button>
           <button id="sound" class="plain"></button>
         </header>
         <div id="cols">
           <section id="book">
             <div class="colhead"><h2 id="book-title"></h2><span class="grow"></span><span id="preset-title" class="small"></span><span id="presets"></span></div>
+            <div id="band" hidden><p id="band-line"><span id="band-text"></span><span class="grow"></span><span id="band-tag"></span></p><button id="band-ex" hidden></button></div>
             <div id="ed-wrap">
               <div id="ed"></div>
               <div id="api" hidden>
@@ -35,7 +38,11 @@
             <div id="meter"><span id="meter-bar"><i></i></span><b id="meter-label"></b><span id="meter-note"></span></div>
             <div id="err"><p id="err-what"></p><p id="err-why"></p><p id="err-fix"></p></div>
             <div id="chips"></div>
-            <div id="api-row"><button id="api-open" class="plain"></button></div>
+            <div id="api-row">
+              <button id="api-open" class="plain"></button><span class="grow"></span>
+              <span id="slot-title" class="small"></span><span id="slots"></span>
+              <button id="slot-save" class="plain"></button><button id="slot-load" class="plain"></button>
+            </div>
           </section>
           <section id="mid">
             <div class="colhead"><h2 id="circle-title"></h2></div>
@@ -71,6 +78,7 @@
         <p id="end-kills"></p>
         <p id="end-augs"></p>
         <p id="end-runes"></p>
+        <p id="end-note"></p>
         <button id="end-again"></button>
       </section>
     </div>
