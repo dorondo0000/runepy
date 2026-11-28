@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rune.py</title>
-    <script type="module" crossorigin src="./assets/proto5-Cf2iLMsQ.js"></script>
+    <script type="module" crossorigin src="./assets/proto5-Bit4TFWL.js"></script>
     <link rel="modulepreload" crossorigin href="./assets/700-54RcnS5h.js">
-    <link rel="modulepreload" crossorigin href="./assets/dist-kb1TzDFb.js">
-    <link rel="modulepreload" crossorigin href="./assets/gate-DFjPLCr3.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CfPhYAhd.js">
+    <link rel="modulepreload" crossorigin href="./assets/gate-Ckwe1_lH.js">
     <link rel="stylesheet" crossorigin href="./assets/700-BsM5XIEu.css">
-    <link rel="stylesheet" crossorigin href="./assets/proto5-CWc9BDkG.css">
+    <link rel="stylesheet" crossorigin href="./assets/proto5-DN7e6mAD.css">
   </head>
   <body>
     <div id="p5">
@@ -70,14 +70,19 @@
       <!-- 전투 중 파편 해금 등 짧은 알림 띠(화면 위) -->
       <p id="alert" class="px-frame" hidden></p>
 
-      <!-- 마도서(v12): 전투 중 Tab으로 언제나 연다·닫는다. 열려 있는 동안 세계는 멈춘다. 고친 술식은 0.4초 뒤 이 전투에 걸린다 -->
+      <!-- 마도서(v12, v25-B 배치): 전투 중 Tab으로 연다·닫는다. 열려 있는 동안 세계는 멈춘다. 고친 술식은 0.4초 뒤 이 전투에 걸린다.
+           기본은 오른쪽 대칭 — [왼쪽: 1.4× 시전자+마법진] [가운데 오른쪽: 코드(위 책갈피 탭)] [바깥 끝: Docs | 보조 코드, 접기].
+           설정 "배치"로 좌우를 뒤집는다(#p5.side-left). 책갈피 탭 = 마도서 칸(고치면 자동 저장) -->
       <section id="grimoire" hidden>
         <div id="book-wrap" class="lift">
+          <nav id="book-tabs" role="tablist"></nav>
           <section id="book" class="sheet px-frame">
+            <i class="brass tl" aria-hidden="true"></i><i class="brass tr" aria-hidden="true"></i><i class="brass bl" aria-hidden="true"></i><i class="brass br" aria-hidden="true"></i>
+            <i id="book-ribbon" aria-hidden="true"></i>
             <div class="bookhead">
               <div class="bookrow">
                 <h2 id="book-title"></h2><span id="status"></span><span class="grow"></span>
-                <button id="docs-toggle" class="btn-wood sm" aria-pressed="false"><span id="docs-toggle-label"></span><kbd id="docs-toggle-key"></kbd></button>
+                <button id="skin-toggle" class="btn-icon sm" hidden><span id="skin-toggle-icon" aria-hidden="true"></span></button>
                 <button id="book-close" class="btn-wood sm"><span id="book-close-label"></span><kbd id="book-close-key"></kbd></button>
               </div>
               <div class="bookrow" id="preset-row"><span id="preset-title" class="small"></span><span id="presets"></span></div>
@@ -88,24 +93,31 @@
             </div>
             <div id="meter"><span id="meter-bar"><i></i></span><b id="meter-label"></b><span id="meter-note"></span></div>
             <div id="err"><p id="err-what"></p><p id="err-why"></p><p id="err-fix"></p></div>
-            <div id="api-row">
-              <button id="open-settings" class="btn-wood sm"></button>
-              <button id="to-title" class="btn-wood sm"></button>
-              <span class="grow"></span>
-              <span id="slot-title" class="small"></span><span id="slots"></span>
-              <button id="slot-save" class="btn-wood sm"></button><button id="slot-load" class="btn-wood sm"></button>
-            </div>
           </section>
         </div>
       </section>
 
-      <!-- 문서 창(v12): 마도서와 따로 여닫는 두 번째 판(F1). 마도서가 열려 있으면 그 오른쪽에 나란히 -->
+      <!-- 바깥 판(v25-B): 마도서의 바깥 끝에 붙는 Docs | 보조 코드. 접으면 얇은 책등 탭만(#docs-spine) -->
       <div id="docs-win" class="lift" hidden>
         <section id="docs" class="sheet px-frame">
-          <div class="docshead"><h2 id="docs-title"></h2><span class="grow"></span><button id="docs-close" class="btn-wood sm"></button></div>
+          <div class="docshead">
+            <nav id="outer-mode" role="tablist"><button id="mode-docs" class="btn-wood sm" role="tab"></button><button id="mode-aux" class="btn-wood sm" role="tab"></button></nav>
+            <span class="grow"></span><button id="docs-close" class="btn-icon sm"></button>
+          </div>
           <input id="docs-search" type="search" autocomplete="off" spellcheck="false" />
           <div id="docs-body"></div>
+          <div id="aux-body" hidden></div>
         </section>
+      </div>
+      <button id="docs-spine" class="btn-wood" hidden></button>
+
+      <!-- 전투 구석 반투명 ⏸ + 일시정지 팝업(v25-B): 전투 중 Esc도 이 팝업 -->
+      <button id="pause-btn" class="px-btn pf-dark" hidden><span aria-hidden="true">⏸</span></button>
+      <div id="pause" class="panel lift" hidden role="dialog" aria-modal="true">
+        <div class="sheet px-frame">
+          <h3 id="pause-title"></h3>
+          <div id="pause-list"></div>
+        </div>
       </div>
 
       <!-- 마법진 크게 보기: 세계 속 발밑 마법진을 누르면 -->
@@ -131,12 +143,15 @@
         </div>
       </section>
 
-      <!-- 작은 판: 설정(제목에서, 마도서에서도). 맨 아래 "만든 사람" 작은 줄(v16) -->
+      <!-- 작은 판: 설정(제목·거점·일시정지 팝업에서). 맨 아래 "만든 사람" 작은 줄(v16) -->
       <div id="settings" class="panel lift" hidden>
         <div class="sheet px-frame">
           <h3 id="settings-title"></h3>
           <button id="sound" class="btn-wood row"></button>
+          <button id="book-side" class="btn-wood row"></button>
+          <button id="book-skin" class="btn-wood row" hidden></button>
           <button id="open-all" class="btn-wood row"></button>
+          <button id="tour-again" class="btn-wood row"></button>
           <button id="wipe" class="btn-wood row"></button>
           <button id="settings-close" class="btn-wood"></button>
           <p id="credits-line"></p>
